@@ -1,6 +1,6 @@
 # hydris
 
-[![Build Status][circle-image]][travis-url]
+[![Build Status][circleci-image]][circleci-url]
 
 [![NPM version][npm-version-image]][npm-url]
 [![NPM downloads][npm-downloads-image]][npm-url]
@@ -14,7 +14,7 @@ import hydris from 'hydris'
 
 ```
 
-[circleci-image]:https://circleci.com/gh/dreipol/hydris/tree/master.svg?style=svg&circle-token=03e1eb4da6d7a2a9399f1b8034eb846a9c29b492
+[circleci-image]:https://circleci.com/gh/dreipol/hydris/tree/master.svg?style=svg&circle-token=
 [circleci-url]:https://circleci.com/gh/dreipol/hydris/tree/master
 
 [license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
