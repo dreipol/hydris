@@ -1,5 +1,7 @@
 # hydris
 
+Generic node solution handle SSR for SPA
+
 [![Build Status][circleci-image]][circleci-url]
 
 [![NPM version][npm-version-image]][npm-url]

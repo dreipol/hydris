@@ -1,7 +1,7 @@
 {
   "name": "hydris",
   "version": "0.0.0",
-  "description": "Multithreaded proxy server to handle SSR for SPA",
+  "description": "Generic node solution handle SSR for SPA made with any kind of frontend framework",
   "bin": {
     "hydris": "./bin/index.js"
   },
