@@ -1,16 +1,10 @@
-import resolve from 'rollup-plugin-node-resolve';
-
 export default {
     input: 'index.next.js',
-    plugins: [
-        resolve({
-            jsnext: true,
-        }),
-    ],
+    plugins: [],
     output: [
         {
             file: 'hydris.js',
-            format: 'umd',
+            format: 'cjs',
         },
     ],
 };

@@ -2,6 +2,7 @@
   "name": "hydris",
   "version": "0.0.0",
   "description": "Multithreaded proxy server to handle SSR for SPA",
+  "bin": "hydris.js",
   "main": "hydris.js",
   "jsnext:main": "index.next.js",
   "module": "index.next.js",
@@ -34,7 +35,9 @@
     "@dreipol/eslint-config": "^1.0.0",
     "eslint": "^4.13.1",
     "mocha": "^4.0.1",
-    "rollup": "^0.52.1",
-    "rollup-plugin-node-resolve": "^3.0.0"
+    "rollup": "^0.52.1"
+  },
+  "dependencies": {
+    "puppeteer": "^1.2.0"
   }
 }
