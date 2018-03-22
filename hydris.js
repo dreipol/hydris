@@ -4,21 +4,22 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var puppeteer = _interopDefault(require('puppeteer'));
 
+async function scrape(url) {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(url);
+    await page.screenshot({ path: 'example.png' });
+
+    await browser.close();
+}
+
 var server = Object.seal({
 
 });
 
-(async() => {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto('https://google.com');
-    await page.screenshot({ path: 'example.png' });
-
-    await browser.close();
-})();
-
 var index = Object.freeze({
     server,
+    scrape,
 });
 
 module.exports = index;

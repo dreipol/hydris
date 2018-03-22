@@ -35,7 +35,8 @@
     "@dreipol/eslint-config": "^4.0.0",
     "eslint": "^4.18.2",
     "mocha": "^5.0.1",
-    "rollup": "^0.57.1"
+    "rollup": "^0.57.1",
+    "rollup-plugin-node-resolve": "^3.3.0"
   },
   "dependencies": {
     "puppeteer": "^1.2.0"
