@@ -17,7 +17,9 @@
     "test": "npm run build && npm run lint && mocha test/index"
   },
   "files": [
-    "src/index.js"
+    "hydris.js",
+    "bin",
+    "src"
   ],
   "repository": {
     "type": "git",
