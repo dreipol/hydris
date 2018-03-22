@@ -14,7 +14,7 @@ import hydris from 'hydris'
 
 ```
 
-[circleci-image]:https://circleci.com/gh/dreipol/hydris/tree/master.svg?style=svg&circle-token=
+[circleci-image]:https://circleci.com/gh/dreipol/hydris/tree/master.svg?style=svg&circle-token=dddff0c380aa369c298e337753e3a4e94877a0ca
 [circleci-url]:https://circleci.com/gh/dreipol/hydris/tree/master
 
 [license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
