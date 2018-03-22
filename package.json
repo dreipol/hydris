@@ -12,7 +12,7 @@
     "lint": "eslint ./",
     "build": "rollup -c",
     "doc": "documentation readme src/index.js -s API",
-    "test": "npm run lint && mocha test.js"
+    "test": "npm run build && npm run lint && mocha test/index"
   },
   "files": [
     "src/index.js"

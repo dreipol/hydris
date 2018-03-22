@@ -4,13 +4,14 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var puppeteer = _interopDefault(require('puppeteer'));
 
-async function scrape(url) {
+async function scrape(url, selector = 'body') {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(url);
-    await page.screenshot({ path: 'example.png' });
-
+    const html = await page.$eval(selector, e => e.innerHTML);
     await browser.close();
+
+    return html;
 }
 
 var server = Object.seal({
