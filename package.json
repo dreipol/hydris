@@ -2,7 +2,9 @@
   "name": "hydris",
   "version": "0.0.0",
   "description": "Multithreaded proxy server to handle SSR for SPA",
-  "bin": "hydris.js",
+  "bin": {
+    "hydris": "./bin/index.js"
+  },
   "main": "hydris.js",
   "jsnext:main": "src/index.js",
   "module": "src/index.js",
@@ -11,7 +13,7 @@
     "ci-test": "eslint -c .eslintrc --no-eslintrc -f junit ./ > reports/eslint.xml",
     "lint": "eslint ./",
     "build": "rollup -c",
-    "doc": "documentation readme src/index.js -s API",
+    "demo": "node test/demo-server",
     "test": "npm run build && npm run lint && mocha test/index"
   },
   "files": [
@@ -40,6 +42,7 @@
   },
   "dependencies": {
     "curri": "^1.0.0",
+    "minimist": "^1.2.0",
     "puppeteer": "^1.2.0"
   }
 }

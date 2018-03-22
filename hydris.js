@@ -14,10 +14,15 @@ var querystring = require('querystring');
  * @return { string } html result
  */
 async function scrape(url$$1, selector = 'body') {
+    if (!url$$1) {
+        throw new Error('No url parmeter was detected');
+    }
+
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
     await page.goto(url$$1);
+
     const html = await page.$eval(selector, e => e.innerHTML);
 
     await browser.close();
@@ -37,18 +42,20 @@ var server = Object.freeze({
         return this.responseHandler(response, params);
     },
     async responseHandler(response, params) {
-        if (!params.url) {
-            response.end();
-        }
+        response.setHeader('Content-Type', 'text/plain');
 
         try {
             const html = await scrape(params.url, params.node);
-            response.setHeader('Content-Type', 'text/plain');
-            response.end(html);
+            response.write(html);
         } catch (e) {
-            console.error(e);
-            response.end('');
+            console.error(e, e.message);
+            response.statusCode = 500;
+            response.write('It was not possible to render the page :( !\n\n\n');
+            response.write('Error Message:\n');
+            response.write(e.message);
         }
+
+        response.end();
     },
 });
 

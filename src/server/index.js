@@ -15,17 +15,19 @@ export default Object.freeze({
         return this.responseHandler(response, params);
     },
     async responseHandler(response, params) {
-        if (!params.url) {
-            response.end();
-        }
+        response.setHeader('Content-Type', 'text/plain');
 
         try {
             const html = await scrape(params.url, params.node);
-            response.setHeader('Content-Type', 'text/plain');
-            response.end(html);
+            response.write(html);
         } catch (e) {
-            console.error(e);
-            response.end('');
+            console.error(e, e.message);
+            response.statusCode = 500;
+            response.write('It was not possible to render the page :(\n\n\n');
+            response.write('Error Message:\n');
+            response.write(e.message);
         }
+
+        response.end();
     },
 });
