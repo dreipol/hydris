@@ -9,7 +9,7 @@
 
 ## Usage
 
-### In node
+### As node service
 
 ```js
 import { scrape } from 'hydris';
@@ -20,7 +20,7 @@ import { scrape } from 'hydris';
 }());
 ```
 
-### As Server
+### As Proxy Server
 
 You can use hydris as a proxy server to render your javascrpt contents as string
 

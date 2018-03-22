@@ -50,7 +50,7 @@ var server = Object.freeze({
         } catch (e) {
             console.error(e, e.message);
             response.statusCode = 500;
-            response.write('It was not possible to render the page :( !\n\n\n');
+            response.write('It was not possible to render the page :(\n\n\n');
             response.write('Error Message:\n');
             response.write(e.message);
         }
