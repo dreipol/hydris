@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer';
+import server from './server/index';
 
 (async() => {
     const browser = await puppeteer.launch();
@@ -8,3 +9,7 @@ import puppeteer from 'puppeteer';
 
     await browser.close();
 })();
+
+export default Object.freeze({
+    server,
+});

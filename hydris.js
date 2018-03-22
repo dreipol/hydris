@@ -4,6 +4,10 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var puppeteer = _interopDefault(require('puppeteer'));
 
+var server = Object.seal({
+
+});
+
 (async() => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -12,3 +16,9 @@ var puppeteer = _interopDefault(require('puppeteer'));
 
     await browser.close();
 })();
+
+var index = Object.freeze({
+    server,
+});
+
+module.exports = index;

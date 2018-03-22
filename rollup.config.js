@@ -1,5 +1,5 @@
 export default {
-    input: 'index.next.js',
+    input: 'src/index.js',
     plugins: [],
     output: [
         {
