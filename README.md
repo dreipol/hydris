@@ -10,12 +10,12 @@
 ## Usage
 
 ```js
-import hydris from 'hydris'
+import hydris from 'hydris';
 
-const html = hydris.scrape('http://dreipol.ch', '#root')
-
-console.log(html) // root node innerHTML (rendered via javascript)
-
+(async function() {
+    const html = await hydris.scrape('https://dreipol.ch', '#root');
+    console.log(html); // node innerHTML (included javascript generated markup)
+}());
 ```
 
 [circleci-image]:https://circleci.com/gh/dreipol/hydris/tree/master.svg?style=svg&circle-token=dddff0c380aa369c298e337753e3a4e94877a0ca
