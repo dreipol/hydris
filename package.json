@@ -1,0 +1,40 @@
+{
+  "name": "hydris",
+  "version": "0.0.0",
+  "description": "Multithreaded proxy server to handle SSR for SPA",
+  "main": "hydris.js",
+  "jsnext:main": "index.next.js",
+  "module": "index.next.js",
+  "scripts": {
+    "prepare": "npm run build && npm test",
+    "ci-test": "eslint -c .eslintrc --no-eslintrc -f junit ./ > reports/eslint.xml",
+    "lint": "eslint index.next.js test.js rollup.config.js",
+    "build": "rollup -c",
+    "doc": "documentation readme index.next.js -s API",
+    "test": "npm run lint && mocha test.js"
+  },
+  "files": [
+    "index.next.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dreipol/hydris.git"
+  },
+  "keywords": [
+    "es6",
+    "es2015"
+  ],
+  "author": "Gianluca Guarini <gianluca.guarini@gmail.com> (http://gianlucaguarini.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dreipol/hydris/issues"
+  },
+  "homepage": "https://github.com/dreipol/hydris#readme",
+  "devDependencies": {
+    "@dreipol/eslint-config": "^1.0.0",
+    "eslint": "^4.13.1",
+    "mocha": "^4.0.1",
+    "rollup": "^0.52.1",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  }
+}
