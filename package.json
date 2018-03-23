@@ -1,7 +1,7 @@
 {
   "name": "hydris",
   "version": "0.0.1",
-  "description": "Generic node solution handle SSR for SPA made with any kind of frontend framework",
+  "description": "Generic node service to handle SSR for SPA made with any kind of frontend framework",
   "bin": {
     "hydris": "./bin/index.js"
   },
@@ -26,8 +26,11 @@
     "url": "git+https://github.com/dreipol/hydris.git"
   },
   "keywords": [
-    "es6",
-    "es2015"
+    "SSR",
+    "server side rendering",
+    "scraper",
+    "puppeteer",
+    "crawler"
   ],
   "author": "Gianluca Guarini <gianluca.guarini@gmail.com> (http://gianlucaguarini.com)",
   "license": "MIT",

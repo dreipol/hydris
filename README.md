@@ -1,6 +1,7 @@
 # hydris
 
-Generic node solution handle SSR for SPA
+Generic node service to handle SSR for SPA made with any kind of frontend framework.
+It uses [puppeteer](https://github.com/GoogleChrome/puppeteer) under the hood and it requires Chrome to be installed on your client.
 
 [![Build Status][circleci-image]][circleci-url]
 
@@ -17,8 +18,8 @@ Generic node solution handle SSR for SPA
 import { scrape } from 'hydris';
 
 (async function() {
-    const html = await hydris.scrape('https://dreipol.ch', '#root');
-    console.log(html); // node innerHTML (included javascript generated markup)
+    const html = await hydris.scrape('https://dreipol.ch', '.main-footer--contacts>.main-footer--link');
+    console.log(html); // +41 43 322 06 44 (node innerHTML included javascript generated markup)
 }());
 ```
 
@@ -30,7 +31,8 @@ You can use hydris as a proxy server to render your javascrpt contents as string
 import { server } from 'hydris';
 
 server.start({ port: 3000 }) // server running on 0.0.0.0:3000
-// 0.0.0.0:3000?url=https://google.com
+// 0.0.0.0:3000?url=https://dreipol.ch&node=.main-footer--contacts>.main-footer--link
+// +41 43 322 06 44
 ```
 
 ### Via CLI
@@ -39,7 +41,8 @@ You can use hydris also via cli
 
 ```bash
 npm i hydris -g
-hydris --url http://www.google.com
+hydris --url https://www.dreipol.ch --node ".main-footer--contacts>.main-footer--link"
++41 43 322 06 44
 ```
 
 [circleci-image]:https://circleci.com/gh/dreipol/hydris/tree/master.svg?style=svg&circle-token=dddff0c380aa369c298e337753e3a4e94877a0ca

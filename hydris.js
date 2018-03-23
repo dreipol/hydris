@@ -31,16 +31,33 @@ async function scrape(url$$1, selector = 'body') {
 }
 
 var server = Object.freeze({
+    /**
+     * Start a simple nodejs server
+     * @param  {number} options.port - port where your server will start listening the requests
+     * @return {http.Server} a node server
+     */
     start({ port }) {
         const server = http.createServer(this.requestHandler.bind(this));
         server.listen(port);
         return server;
     },
+
+    /**
+     * Handle the server requests parsing the get params
+     * @param {http.IncomingMessage} request - server incoming user request
+     * @param {http.ServerResponse} response - server output response
+     */
     requestHandler(request, response) {
         const { query } = url.parse(request.url);
         const params = querystring.parse(query);
-        return this.responseHandler(response, params);
+        this.responseHandler(response, params);
     },
+
+    /**
+     * Handle the server response
+     * @param {http.ServerResponse} response - server output response
+     * @param {Object} params - request parameters
+     */
     async responseHandler(response, params) {
         response.setHeader('Content-Type', 'text/plain');
 
