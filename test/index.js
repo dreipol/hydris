@@ -32,11 +32,12 @@ describe('hydris', function() {
 
     describe('hydris server', () => {
         it('Can start the server', (done) => {
-            const server = hydris.server.start({ port: 3000 });
+            const port = 8080;
+            const server = hydris.server.start({ port });
 
             get({
-                hostname: 'localhost',
-                port: 3000,
+                hostname: '127.0.0.1',
+                port,
                 path: `?url=${ localpath('fixtures/index.html') }&node=#root`,
             }, (response) => {
                 assert(response.statusCode, 200);
