@@ -15,7 +15,7 @@ function teardownServer(server) {
 }
 
 describe('hydris', function() {
-    this.timeout = 100000;
+    this.timeout(100000);
 
     it('hydris is alive', () => {
         assert.ok(hydris);
