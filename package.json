@@ -46,7 +46,6 @@
     "rollup-plugin-node-resolve": "^3.3.0"
   },
   "dependencies": {
-    "curri": "^1.0.0",
     "minimist": "^1.2.0",
     "puppeteer": "^1.2.0"
   }
