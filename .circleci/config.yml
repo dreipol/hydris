@@ -21,6 +21,13 @@ jobs:
           command: |
             mkdir -p reports
             npm run ci-test
+      - run:
+          name: coverage
+          environment:
+            COVERALLS_REPO_TOKEN: "rVYE6FcqGZW7QMSX2f4SJFr6ou9GWa2zi"
+          command: |
+            npm run cov
+            npm run cov-html
       - store_test_results:
           path: reports
       - store_artifacts:

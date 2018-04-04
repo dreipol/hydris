@@ -4,6 +4,7 @@ Generic node service to handle SSR for SPA made with any kind of frontend framew
 It uses [puppeteer](https://github.com/GoogleChrome/puppeteer) under the hood and it requires Chrome to be installed on your client.
 
 [![Build Status][circleci-image]][circleci-url]
+[![Coverage Status][coverage-image]][coverage-url]
 
 [![NPM version][npm-version-image]][npm-url]
 [![NPM downloads][npm-downloads-image]][npm-url]
@@ -60,3 +61,6 @@ hydris --url https://www.dreipol.ch --node ".main-footer--contacts>.main-footer-
 [npm-version-image]:http://img.shields.io/npm/v/hydris.svg?style=flat-square
 [npm-downloads-image]:http://img.shields.io/npm/dm/hydris.svg?style=flat-square
 [npm-url]:https://npmjs.org/package/hydris
+
+[coverage-image]: https://img.shields.io/coveralls/dreipol/hydris/master.svg?style=flat-square
+[coverage-url]: https://coveralls.io/r/dreipol/hydris/?branch=master

@@ -24,7 +24,7 @@ async function scrape(url$$1, selector = 'body', options = {}) {
     const page = await browser.newPage();
 
     await page.goto(url$$1);
-
+    /* istanbul ignore next */
     const html = await page.$eval(selector, e => e.innerHTML);
 
     await page.close();

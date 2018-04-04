@@ -13,10 +13,12 @@
     "ci-test": "eslint -c .eslintrc --no-eslintrc -f junit ./ > reports/eslint.xml",
     "lint": "eslint ./",
     "bench": ". ./test/bench.sh",
+    "cov": "nyc report --reporter=text-lcov | coveralls",
+    "cov-html": "nyc report --reporter html --report-dir reports/coverage",
     "build": "rollup -c",
     "demo": "node test/demo-server.js",
     "pretest": "npm run build",
-    "test": " npm run lint && mocha test/index"
+    "test": " npm run lint && nyc mocha test/index"
   },
   "files": [
     "hydris.js",
@@ -43,8 +45,10 @@
   "devDependencies": {
     "@dreipol/eslint-config": "^4.0.0",
     "artillery": "^1.6.0-15",
+    "coveralls": "^3.0.0",
     "eslint": "^4.18.2",
     "mocha": "^5.0.1",
+    "nyc": "^11.6.0",
     "rollup": "^0.57.1",
     "rollup-plugin-node-resolve": "^3.3.0"
   },
