@@ -2,14 +2,13 @@ const assert = require('assert');
 const bin = require('../bin');
 const hookStdout = require('./hook-stdout');
 const hydris = require('../');
-const { get } = require('http');
+const request = require('request');
 
-/*eslint max-nested-callbacks: ["error", 6]*/
+/*eslint max-nested-callbacks: ['error', 6]*/
 
 function localpath(path) {
     return `file://${ __dirname }/${ path }`;
 }
-
 
 
 describe('hydris', function() {
@@ -30,20 +29,28 @@ describe('hydris', function() {
         });
     });
 
-    describe('hydris server', () => {
-        it('Can start the server', (done) => {
-            const port = 8080;
-            hydris.server.start({ port }).then(server => {
-                get({
-                    hostname: '127.0.0.1',
-                    port,
-                    path: `?url=${ localpath('fixtures/index.html') }&node=#root`,
-                }, async (response) => {
-                    assert(response.statusCode, 200);
-                    await server.close();
-                    done();
-                });
+    describe('hydris server', async () => {
+        const port = 3000;
+        const server = await hydris.server.start({ port });
+        const baseurl = `http://0.0.0.0:${ port }`;
+
+        it('Can get the content of a DOM node', (done) => {
+            request(`${ baseurl }?url=${ localpath('fixtures/index.html') }&node=%23root`, async (err, response, body) => {
+                assert(response.statusCode, 200);
+                assert.ok(/Hello/.test(body));
+                done();
             });
+        });
+
+        it('It returns 500 in case of missing params', (done) => {
+            request(`${ baseurl }?url=doo&node=%23root`, async (err, response) => {
+                assert(response.statusCode, 500);
+                done();
+            });
+        });
+
+        after(async () => {
+            await server.close();
         });
     });
 
