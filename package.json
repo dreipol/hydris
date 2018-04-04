@@ -12,9 +12,11 @@
     "prepare": "npm run build && npm test",
     "ci-test": "eslint -c .eslintrc --no-eslintrc -f junit ./ > reports/eslint.xml",
     "lint": "eslint ./",
+    "bench": ". ./test/bench.sh",
     "build": "rollup -c",
-    "demo": "node test/demo-server",
-    "test": "npm run build && npm run lint && mocha test/index"
+    "demo": "node test/demo-server.js",
+    "pretest": "npm run build",
+    "test": " npm run lint && mocha test/index"
   },
   "files": [
     "hydris.js",
@@ -40,6 +42,7 @@
   "homepage": "https://github.com/dreipol/hydris#readme",
   "devDependencies": {
     "@dreipol/eslint-config": "^4.0.0",
+    "artillery": "^1.6.0-15",
     "eslint": "^4.18.2",
     "mocha": "^5.0.1",
     "rollup": "^0.57.1",

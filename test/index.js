@@ -10,9 +10,7 @@ function localpath(path) {
     return `file://${ __dirname }/${ path }`;
 }
 
-function teardownServer(server) {
-    server.close();
-}
+
 
 describe('hydris', function() {
     this.timeout(100000);
@@ -35,16 +33,16 @@ describe('hydris', function() {
     describe('hydris server', () => {
         it('Can start the server', (done) => {
             const port = 8080;
-            const server = hydris.server.start({ port });
-
-            get({
-                hostname: '127.0.0.1',
-                port,
-                path: `?url=${ localpath('fixtures/index.html') }&node=#root`,
-            }, (response) => {
-                assert(response.statusCode, 200);
-                teardownServer(server);
-                done();
+            hydris.server.start({ port }).then(server => {
+                get({
+                    hostname: '127.0.0.1',
+                    port,
+                    path: `?url=${ localpath('fixtures/index.html') }&node=#root`,
+                }, async (response) => {
+                    assert(response.statusCode, 200);
+                    await server.close();
+                    done();
+                });
             });
         });
     });

@@ -41,3 +41,6 @@ jspm_packages
 
 # Unit Tests
 /reports
+
+# PyCharm settings files
+.idea/

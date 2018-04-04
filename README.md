@@ -30,9 +30,11 @@ You can use hydris as a proxy server to render your javascrpt contents as string
 ```js
 import { server } from 'hydris';
 
-server.start({ port: 3000 }) // server running on 0.0.0.0:3000
-// 0.0.0.0:3000?url=https://dreipol.ch&node=.main-footer--contacts>.main-footer--link
-// +41 43 322 06 44
+(async function() {
+    const html = async server.start({ port: 3000 }) // server running on 0.0.0.0:3000
+    // 0.0.0.0:3000?url=https://dreipol.ch&node=.main-footer--contacts>.main-footer--link
+    // +41 43 322 06 44
+}()}
 ```
 
 ### Via CLI
