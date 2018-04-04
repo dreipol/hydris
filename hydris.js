@@ -1,8 +1,6 @@
 'use strict';
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var puppeteer = _interopDefault(require('puppeteer'));
+var puppeteer = require('puppeteer');
 var http = require('http');
 var url = require('url');
 var querystring = require('querystring');
