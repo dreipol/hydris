@@ -20,6 +20,11 @@ describe('hydris', function() {
 
     describe('hydris scraping core', () => {
         it('Scraping the content of a html file', async () => {
+            const html = await hydris.scrape(localpath('fixtures/index.html'));
+            assert.ok(/Hello/.test(html));
+        });
+
+        it('Scraping the content of a html file with a selector', async () => {
             const html = await hydris.scrape(localpath('fixtures/index.html'), '#root');
             assert.ok(/Hello/.test(html));
         });
@@ -31,8 +36,13 @@ describe('hydris', function() {
 
     describe('hydris server', async () => {
         const port = 3000;
-        const server = await hydris.server.start({ port });
         const baseurl = `http://0.0.0.0:${ port }`;
+        let server;
+
+        before('It can start the server', async () => {
+            server = await hydris.server.start({ port });
+        });
+
 
         it('Can get the content of a DOM node', (done) => {
             request(`${ baseurl }?url=${ localpath('fixtures/index.html') }&node=%23root`, async (err, response, body) => {
@@ -63,6 +73,12 @@ describe('hydris', function() {
             });
 
             bin.run(['--url', localpath('fixtures/index.html'), '--node', '#root']);
+        });
+
+        it('It fails in case of wrong urls', async () => {
+            const ret = await bin.run(['--url', '', '--node', '#root']);
+
+            assert.equal(ret, 1);
         });
 
         it('It can generate the help message', (done) => {

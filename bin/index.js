@@ -55,6 +55,7 @@ async function run(args) {
         exitCode = help();
     }
 
+    /* istanbul ignore next */
     if (IS_MAIN) {
         process.exit(exitCode);
     }
@@ -69,6 +70,7 @@ module.exports = {
 };
 
 // if it's called directly we run it right the way
+/* istanbul ignore next */
 if (IS_MAIN) {
     run(process.argv.slice(2));
 }
