@@ -26,7 +26,7 @@ import { scrape } from 'hydris';
 
 ### As Proxy Server
 
-You can use hydris as a proxy server to render your javascrpt contents as string
+You can use hydris as a proxy server to render your javascript contents as string
 
 ```js
 import { server } from 'hydris';
@@ -60,8 +60,8 @@ hydris --url https://www.dreipol.ch --node ".main-footer--contacts>.main-footer-
 ```
 
 ## TODO
-  - [ ] multithread requests handling for the proxy server
-  - [ ] persistent browser scraper to improve the performances
+  - [x] requests handling via process forking ([see also](#as-proxy-server) and [here](http://www.acuriousanimal.com/2017/08/18/using-cluster-module-with-http-servers.html))
+  - [x] persistent browser scraper to improve the performances
 
 [circleci-image]:https://circleci.com/gh/dreipol/hydris/tree/master.svg?style=svg&circle-token=dddff0c380aa369c298e337753e3a4e94877a0ca
 [circleci-url]:https://circleci.com/gh/dreipol/hydris/tree/master
