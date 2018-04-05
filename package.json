@@ -1,6 +1,6 @@
 {
   "name": "hydris",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Generic node service to handle SSR for SPA made with any kind of frontend framework",
   "bin": {
     "hydris": "./bin/index.js"
