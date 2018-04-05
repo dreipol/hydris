@@ -75,6 +75,16 @@ describe('hydris', function() {
             bin.run(['--url', localpath('fixtures/index.html'), '--node', '#root']);
         });
 
+        it('It can scrape an url using arguments shortcuts', (done) => {
+            const unhook = hookStdout(function(string) {
+                assert.ok(/Hello/.test(string));
+                unhook();
+                done();
+            });
+
+            bin.run(['--u', localpath('fixtures/index.html'), '--n', '#root']);
+        });
+
         it('It fails in case of wrong urls', async () => {
             const ret = await bin.run(['--url', '', '--node', '#root']);
 
