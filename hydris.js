@@ -21,6 +21,11 @@ async function scrape(url$$1, selector = 'body', options = {}) {
     const browser = (options.browser || await puppeteer.launch());
     const page = await browser.newPage();
 
+    // set a custom header to identify the hydris crawler
+    await page.setExtraHTTPHeaders({
+        'is-hydris': 'true',
+    });
+
     await page.goto(url$$1);
     /* istanbul ignore next */
     const html = await page.$eval(selector, e => e.innerHTML);
