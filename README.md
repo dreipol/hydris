@@ -39,7 +39,7 @@ if (cluster.isMaster) {
     }
 } else {
     // server running on 0.0.0.0:3000
-    hydris.server.start({
+    server.start({
         port: 3000,
     });
 }
