@@ -6,11 +6,14 @@ import { createScraper } from '../scraper';
 export default Object.freeze({
     /**
      * Start a simple nodejs server
+     * @param  {Object} options - server options mixed with the scraper options
      * @param  {number} options.port - port where your server will start listening the requests
+     * @param  {Object} options.scraperOptions - options we want to pass to the scraper
      * @return {http.Server} a node server
      */
-    async start({ port }) {
-        const scraper = await createScraper();
+    async start(options) {
+        const { port, ...scraperOptions } = options;
+        const scraper = await createScraper(scraperOptions);
         const server = createServer(this.requestHandler.bind(this, scraper));
 
         // close the browser when the browser will be closed
@@ -43,9 +46,10 @@ export default Object.freeze({
      */
     async responseHandler(scraper, response, params) {
         response.setHeader('Content-Type', 'text/plain');
+        const { url, node, ...userOptions } = params;
 
         try {
-            const html = await scraper.scrape(params.url, params.node);
+            const html = await scraper.scrape(url, node, userOptions);
             response.write(html);
         } catch (e) {
             console.error(e, e.message);

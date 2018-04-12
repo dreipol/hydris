@@ -2,11 +2,12 @@ import puppeteer from 'puppeteer';
 
 /**
  * Scrape the content of any url getting the rendered html
- * @param  { string } url - url to load
- * @param  { string } selector - DOM selector to filter the resulting html
- * @param  { Object } options - Custom user options
- * @param  { puppeteer.Browser } options.browser - The browser can be injected in order to be persistent across several calls
- * @return { string } html result
+ * @param  {string} url - url to load
+ * @param  {string} selector - DOM selector to filter the resulting html
+ * @param  {Object} options - Custom user options
+ * @param  {puppeteer.Browser} options.browser - The browser can be injected in order to be persistent across several calls
+ * @param  {boolean} options.outer - if true it will return the outer html of the selector
+ * @return {string} html result
  */
 export async function scrape(url, selector = 'body', options = {}) {
     if (!url) {
@@ -23,7 +24,11 @@ export async function scrape(url, selector = 'body', options = {}) {
 
     await page.goto(url);
     /* istanbul ignore next */
-    const html = await page.$eval(selector, e => e.innerHTML);
+    const html = await page.$eval(
+        selector,
+        (e, outer) => e[outer ? 'outerHTML' : 'innerHTML'],
+        options.outer
+    );
 
     await page.close();
 
@@ -37,18 +42,19 @@ export async function scrape(url, selector = 'body', options = {}) {
 
 /**
  * Create a persistent scraper instance in order to fetch multiple pages with the same browser instance
+ * @param  {Object} options - scraper options
  * @return {Promise<{browser: *, scrape: scrape, close}>}
- * @return { puppeteer.Browser } browser - a persistent browser instance
- * @return { Browser.close } close - alias to the browser close method
- * @return { Browser.scrape } scrape - a method similar to the scrape function above having using a persistent browser instance
+ * @return {puppeteer.Browser} browser - a persistent browser instance
+ * @return {Browser.close} close - alias to the browser close method
+ * @return {Browser.scrape} scrape - a method similar to the scrape function above having using a persistent browser instance
  */
-export async function createScraper() {
+export async function createScraper(options) {
     const browser = await puppeteer.launch();
 
     return {
         browser,
-        async scrape(url, selector) {
-            return await scrape(url, selector, { browser });
+        async scrape(url, selector, userOptions) {
+            return await scrape(url, selector, { browser, ...userOptions, ...options });
         },
         close: browser.close.bind(browser),
     };

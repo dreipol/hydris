@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const IS_MAIN = require.main === module;
 const minimist = require('minimist');
+const pkg = require('../package.json');
 const { scrape } = require('../');
 
 /**
@@ -10,7 +11,10 @@ const { scrape } = require('../');
 function help() {
     console.log(`Options:
   --url, -u     Url you want to render
-  --node, -n     The DOM node to query`);
+  --node, -n    The DOM node to query
+  --outer       If set we will get the outerHTML of the selector
+
+  version - ${ pkg.version }`);
 
     return 0;
 }
@@ -19,15 +23,17 @@ function help() {
  * Generate the result of the scraping
  * @param   {string} options.url  - url to scrape
  * @param   {string} options.node - DOM node to filter
+ * @param   {string} options.outer - If truthy it will get the outerHTML of the selector
  * @param   {string} options.u - alias for options.url
  * @param   {string} options.n - alias for options.node
  * @return {number} exit code
  */
-async function exec({ url, node, u, n }) {
+async function exec({ url, node, outer, u, n }) {
     try {
         const html = await scrape(
             url || u,
-            node || n
+            node || n,
+            { outer: Boolean(outer) }
         );
 
         console.log(html);
