@@ -9,7 +9,7 @@ var querystring = require('querystring');
  * Scrape the content of any url getting the rendered html
  * @param  {string} url - url to load
  * @param  {string} selector - DOM selector to filter the resulting html
- * @param  {Object} options - Custom user options
+ * @param  {object} options - Custom user options
  * @param  {puppeteer.Browser} options.browser - The browser can be injected in order to be persistent across several calls
  * @param  {boolean} options.outer - if true it will return the outer html of the selector
  * @return {string} html result
@@ -46,7 +46,7 @@ async function scrape(url$$1, selector = 'body', options = {}) {
 }
 /**
  * Create a persistent scraper instance in order to fetch multiple pages with the same browser instance
- * @param  {Object} options - scraper options
+ * @param  {object} options - scraper options
  * @return {Promise<{browser: *, scrape: scrape, close}>}
  * @return {puppeteer.Browser} browser - a persistent browser instance
  * @return {Browser.close} close - alias to the browser close method
@@ -57,8 +57,8 @@ async function createScraper(options) {
 
     return {
         browser,
-        async scrape(url$$1, selector, userOptions) {
-            return await scrape(url$$1, selector, { browser, ...userOptions, ...options });
+        scrape(url$$1, selector, userOptions) {
+            return scrape(url$$1, selector, { browser, ...userOptions, ...options });
         },
         close: browser.close.bind(browser),
     };
@@ -67,9 +67,9 @@ async function createScraper(options) {
 var server = Object.freeze({
     /**
      * Start a simple nodejs server
-     * @param  {Object} options - server options mixed with the scraper options
+     * @param  {object} options - server options mixed with the scraper options
      * @param  {number} options.port - port where your server will start listening the requests
-     * @param  {Object} options.scraperOptions - options we want to pass to the scraper
+     * @param  {object} options.scraperOptions - options we want to pass to the scraper
      * @return {http.Server} a node server
      */
     async start(options) {
@@ -78,8 +78,8 @@ var server = Object.freeze({
         const server = http.createServer(this.requestHandler.bind(this, scraper));
 
         // close the browser when the browser will be closed
-        server.on('close', async function() {
-            return await scraper.close();
+        server.on('close', function() {
+            scraper.close();
         });
 
         server.listen(port);
@@ -89,7 +89,7 @@ var server = Object.freeze({
 
     /**
      * Handle the server requests parsing the get params
-     * @param {Object} scraper - persistent scraper object
+     * @param {object} scraper - persistent scraper object
      * @param {http.IncomingMessage} request - server incoming user request
      * @param {http.ServerResponse} response - server output response
      */
@@ -101,9 +101,9 @@ var server = Object.freeze({
 
     /**
      * Handle the server response
-     * @param {Object} scraper - persistent scraper object
+     * @param {object} scraper - persistent scraper object
      * @param {http.ServerResponse} response - server output response
-     * @param {Object} params - request parameters
+     * @param {object} params - request parameters
      */
     async responseHandler(scraper, response, params) {
         response.setHeader('Content-Type', 'text/plain');

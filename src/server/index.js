@@ -6,9 +6,9 @@ import { createScraper } from '../scraper';
 export default Object.freeze({
     /**
      * Start a simple nodejs server
-     * @param  {Object} options - server options mixed with the scraper options
+     * @param  {object} options - server options mixed with the scraper options
      * @param  {number} options.port - port where your server will start listening the requests
-     * @param  {Object} options.scraperOptions - options we want to pass to the scraper
+     * @param  {object} options.scraperOptions - options we want to pass to the scraper
      * @return {http.Server} a node server
      */
     async start(options) {
@@ -17,8 +17,8 @@ export default Object.freeze({
         const server = createServer(this.requestHandler.bind(this, scraper));
 
         // close the browser when the browser will be closed
-        server.on('close', async function() {
-            return await scraper.close();
+        server.on('close', function() {
+            scraper.close();
         });
 
         server.listen(port);
@@ -28,7 +28,7 @@ export default Object.freeze({
 
     /**
      * Handle the server requests parsing the get params
-     * @param {Object} scraper - persistent scraper object
+     * @param {object} scraper - persistent scraper object
      * @param {http.IncomingMessage} request - server incoming user request
      * @param {http.ServerResponse} response - server output response
      */
@@ -40,9 +40,9 @@ export default Object.freeze({
 
     /**
      * Handle the server response
-     * @param {Object} scraper - persistent scraper object
+     * @param {object} scraper - persistent scraper object
      * @param {http.ServerResponse} response - server output response
-     * @param {Object} params - request parameters
+     * @param {object} params - request parameters
      */
     async responseHandler(scraper, response, params) {
         response.setHeader('Content-Type', 'text/plain');

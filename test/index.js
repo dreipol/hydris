@@ -4,7 +4,8 @@ const hookStdout = require('./hook-stdout');
 const hydris = require('../');
 const request = require('request');
 
-/*eslint max-nested-callbacks: ['error', 6]*/
+/* eslint-disable max-lines-per-function */
+/*eslint max-nested-callbacks: ['error', 6] */
 
 function localpath(path) {
     return `file://${ __dirname }/${ path }`;
@@ -39,18 +40,17 @@ describe('hydris', function() {
         });
     });
 
-    describe('hydris server', async () => {
+    describe('hydris server', () => {
         const port = 3000;
         const baseurl = `http://0.0.0.0:${ port }`;
         let server;
 
         before('It can start the server', async () => {
-            server = await hydris.server.start({ port });
+            server = await hydris.server.start({ port }); // eslint-disable-line
         });
 
-
         it('Can get the inner content of a DOM node', (done) => {
-            request(`${ baseurl }?url=${ localpath('fixtures/index.html') }&node=%23root`, async (err, response, body) => {
+            request(`${ baseurl }?url=${ localpath('fixtures/index.html') }&node=%23root`, (err, response, body) => {
                 assert(response.statusCode, 200);
                 assert.ok(/Hello/.test(body));
                 done();
@@ -58,7 +58,7 @@ describe('hydris', function() {
         });
 
         it('Can get the outer content of a DOM node via params', (done) => {
-            request(`${ baseurl }?url=${ localpath('fixtures/index.html') }&node=%23root&outer=1`, async (err, response, body) => {
+            request(`${ baseurl }?url=${ localpath('fixtures/index.html') }&node=%23root&outer=1`, (err, response, body) => {
                 assert(response.statusCode, 200);
                 assert.ok(/root/.test(body));
                 done();
@@ -66,7 +66,7 @@ describe('hydris', function() {
         });
 
         it('It returns 500 in case of missing params', (done) => {
-            request(`${ baseurl }?url=doo&node=%23root`, async (err, response) => {
+            request(`${ baseurl }?url=doo&node=%23root`, (err, response) => {
                 assert(response.statusCode, 500);
                 done();
             });
@@ -77,18 +77,17 @@ describe('hydris', function() {
         });
     });
 
-    describe('hydris server with custom options', async () => {
+    describe('hydris server with custom options', () => {
         const port = 3000;
         const baseurl = `http://0.0.0.0:${ port }`;
         let server;
 
         before('It can start the server', async () => {
-            server = await hydris.server.start({ port, outer: true });
+            server = await hydris.server.start({ port, outer: true }); // eslint-disable-line
         });
 
-
         it('Can get the outer content of a DOM node', (done) => {
-            request(`${ baseurl }?url=${ localpath('fixtures/index.html') }&node=%23root`, async (err, response, body) => {
+            request(`${ baseurl }?url=${ localpath('fixtures/index.html') }&node=%23root`, (err, response, body) => {
                 assert(response.statusCode, 200);
                 assert.ok(/root/.test(body));
                 done();
@@ -96,7 +95,7 @@ describe('hydris', function() {
         });
 
         it('The server initial options will always override the user ones', (done) => {
-            request(`${ baseurl }?url=${ localpath('fixtures/index.html') }&node=%23root&outer=0`, async (err, response, body) => {
+            request(`${ baseurl }?url=${ localpath('fixtures/index.html') }&node=%23root&outer=0`, (err, response, body) => {
                 assert(response.statusCode, 200);
                 assert.ok(/root/.test(body));
                 done();
