@@ -19,7 +19,12 @@ It uses [puppeteer](https://github.com/GoogleChrome/puppeteer) under the hood an
 import { scrape } from 'hydris';
 
 (async function() {
-    const html = await hydris.scrape('https://dreipol.ch', '.main-footer--contacts>.main-footer--link');
+    const html = await scrape('https://dreipol.ch', '.main-footer--contacts>.main-footer--link', {
+        launchOptions: {
+            // options that will be passed to puppeteer.launch
+            defaultViewport: { width: 1024, height: 768 },    
+        }
+    });
     console.log(html); // +41 43 322 06 44 (node innerHTML included javascript generated markup)
 }());
 ```
@@ -41,6 +46,10 @@ if (cluster.isMaster) {
     // server running on 0.0.0.0:3000
     server.start({
         port: 3000,
+        launchOptions: {
+            // options that will be passed to puppeteer.launch
+            defaultViewport: { width: 1024, height: 768 },    
+        }
     });
 }
 
