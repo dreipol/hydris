@@ -5,6 +5,7 @@ const hydris = require('../');
 const request = require('request');
 
 /* eslint-disable max-lines-per-function */
+
 /*eslint max-nested-callbacks: ['error', 6] */
 
 function localpath(path) {
@@ -33,6 +34,16 @@ describe('hydris', function() {
         it('Scraping the outer content of a html file with a selector', async () => {
             const html = await hydris.scrape(localpath('fixtures/index.html'), '#root', { outer: true });
             assert.ok(/root/.test(html));
+        });
+
+        it('Scraping with a different viewport size', async () => {
+            const html = await hydris.scrape(localpath('fixtures/index.html'), '#viewportData', {
+                launchOptions: {
+                    defaultViewport: { width: 1820, height: 768 },
+                },
+            });
+
+            assert.ok(/1820x768/.test(html));
         });
 
         it('Throw if no url will be passed', (done) => {

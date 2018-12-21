@@ -19,7 +19,7 @@ async function scrape(url$$1, selector = 'body', options = {}) {
         throw new Error('No url parmeter was detected');
     }
 
-    const browser = (options.browser || await puppeteer.launch());
+    const browser = (options.browser || await puppeteer.launch(options.launchOptions));
     const page = await browser.newPage();
 
     // set a custom header to identify the hydris crawler
@@ -53,7 +53,7 @@ async function scrape(url$$1, selector = 'body', options = {}) {
  * @return {Browser.scrape} scrape - a method similar to the scrape function above having using a persistent browser instance
  */
 async function createScraper(options) {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch(options.launchOptions);
 
     return {
         browser,
